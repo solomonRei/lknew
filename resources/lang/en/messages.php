@@ -15,6 +15,8 @@ return [
     //Breadcrumbs
     'breadcrumbs.home' => 'Home',
     'language' => 'Language',
+    'breadcrumbs.orders' => 'Orders',
+    'breadcrumbs.profile' => 'Profile',
 
     // Alerts
     'alert.error' => 'Error!',

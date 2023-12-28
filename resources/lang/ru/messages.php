@@ -19,6 +19,8 @@ return [
     //Breadcrumbs
     'breadcrumbs.home' => 'Главная',
     'language' => 'Язык',
+    'breadcrumbs.orders' => 'Заказы',
+    'breadcrumbs.profile' => 'Профиль',
 
     'name' => 'Введите имя',
     'phone' => 'Введите телефон',

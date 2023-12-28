@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Session;
 */
 
 Route::get('/', function () {
-    return redirect('/profile');
-});
+    return view('front.home');
+})->name('home');
 
 Route::get('/language/{lang}', function ($lang) {
     Session::put('locale', $lang);
@@ -37,4 +37,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/orders', function () {
+        return view('front.orders');
+    })->name('orders');
+
 });
