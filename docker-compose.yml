@@ -24,8 +24,25 @@ services:
             context: .docker/php
             dockerfile: dockerfile
         container_name: backend
+        environment:
+            DB_HOST: db
+            DB_PORT: 3306
+            DB_DATABASE: laravel
+            DB_USERNAME: laraveluser
+            DB_PASSWORD: laravelpassword
         volumes:
             - ./:/var/www
             - .docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
         networks:
             app-network:
+    db:
+        image: mysql:8.0
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: laravel
+            MYSQL_USER: laraveluser
+            MYSQL_PASSWORD: laravelpassword
+            MYSQL_ROOT_PASSWORD: rootpassword
+        volumes:
+            - dbdata:/var/lib/mysql
