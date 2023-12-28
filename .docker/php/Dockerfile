@@ -33,7 +33,7 @@ RUN groupadd -g 1000 ${GROUP} && useradd -u 1000 -ms /bin/bash -g ${GROUP} ${USE
 
 # Set the correct permissions for Laravel
 RUN chown -R www-data:www-data /var/www
-RUN chmod -R 775 /var/www
+RUN chmod -R 777 /var/www
 
 # Grant Permissions
 RUN chown -R ${USER} /var/www
