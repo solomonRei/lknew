@@ -5,6 +5,7 @@ networks:
 
 volumes:
     app-data:
+    dbdata:
 
 services:
     webserver:
@@ -17,12 +18,12 @@ services:
             - ./:/var/www
             - .docker/nginx:/etc/nginx/conf.d
         networks:
-            app-network:
+            - app-network
 
     backend:
         build:
             context: .docker/php
-            dockerfile: dockerfile
+            dockerfile: Dockerfile
         container_name: backend
         environment:
             DB_HOST: db
@@ -34,7 +35,8 @@ services:
             - ./:/var/www
             - .docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
         networks:
-            app-network:
+            - app-network
+
     db:
         image: mysql:8.0
         ports:
@@ -46,3 +48,5 @@ services:
             MYSQL_ROOT_PASSWORD: rootpassword
         volumes:
             - dbdata:/var/lib/mysql
+        networks:
+            - app-network
