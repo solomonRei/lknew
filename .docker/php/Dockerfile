@@ -37,7 +37,6 @@ COPY --chown=${USER}:${GROUP} . /var/www
 RUN chown -R ${USER}:${GROUP} /var/www \
     && find /var/www -type d -exec chmod 755 {} \; \
     && find /var/www -type f -exec chmod 644 {} \; \
-    && chmod -R 777 /var/www/storage /var/www/bootstrap/cache
 
 # Select User
 USER ${USER}
