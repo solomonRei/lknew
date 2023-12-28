@@ -32,8 +32,8 @@ WORKDIR /var/www/
 RUN groupadd -g 1000 ${GROUP} && useradd -u 1000 -ms /bin/bash -g ${GROUP} ${USER}
 
 # Set the correct permissions for Laravel
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+RUN chown -R www-data:www-data /var/www /var/www
+RUN chmod -R 775 /var/www /var/www
 
 # Grant Permissions
 RUN chown -R ${USER} /var/www
