@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Site title</title>
+    <meta name="description" content="Site description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="favicon.ico" />
+
+    <script type="module" crossorigin src="static/js/app.js"></script>
+    <link rel="stylesheet" href="static/css/app.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div class="layout">
+        <div class="layout__container container">
+          <div class="sidebar">
+            <div class="sidebar__inner">
+              <div class="user">
+                <div class="user__content">
+                  <img
+                    src="static/img/ava-placeholder.svg"
+                    width="44"
+                    height="44"
+                    class="user__ava"
+                    alt=""
+                  />
+                  <div class="user__caption">
+                    <h3 class="user__name">Иван Петров</h3>
+                    <p class="user__role">Пользователь</p>
+                  </div>
+                </div>
+                <nav class="user__actions">
+                  <a href="#" class="user__action"
+                    ><svg viewBox="0 0 24 24" fill="currentColor" class="user__action-icon">
+                      <path
+                        d="m19.44 12.99-.01.02c.04-.33.08-.67.08-1.01 0-.34-.03-.66-.07-.99l.01.02 2.44-1.92-2.43-4.22-2.87 1.16.01.01a7.67 7.67 0 0 0-1.71-1h.01L14.44 2H9.57l-.44 3.07h.01c-.62.26-1.19.6-1.71 1l.01-.01-2.88-1.17-2.44 4.22 2.44 1.92.01-.02a6.77 6.77 0 0 0 .01 2l-.01-.02-2.1 1.65-.33.26 2.43 4.2 2.88-1.15-.02-.04c.53.41 1.1.75 1.73 1.01h-.03L9.58 22h4.85l.06-.42.38-2.65h-.01c.62-.26 1.2-.6 1.73-1.01l-.02.04 2.88 1.15 2.43-4.2-.33-.26-2.11-1.66ZM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"
+                      ></path></svg></a
+                  ><a href="#" class="user__action"
+                    ><svg viewBox="0 0 24 24" fill="currentColor" class="user__action-icon">
+                      <path
+                        d="m17 7-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5-5-5ZM4 5h8V3H4a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h8v-2H4V5Z"
+                      ></path></svg
+                  ></a>
+                </nav>
+              </div>
+              <a class="button button_primary button_md add-button sidebar__create-button" href="#"
+                ><svg viewBox="0 0 24 24" fill="currentColor" class="add-button__icon">
+                  <path
+                    d="M12 22A10 10 0 0 1 2 12v-.2A10 10 0 1 1 12 22ZM7 11v2h4v4h2v-4h4v-2h-4V7h-2v4H7Z"
+                  ></path></svg
+                >Создать заказ</a
+              >
+              <hr class="sidebar__divider" />
+              <nav class="sidebar__nav">
+                <a class="sidebar__nav-link sidebar__nav-link_current" href="#"
+                  ><svg viewBox="0 0 24 24" fill="currentColor" class="sidebar__nav-icon">
+                    <path
+                      d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27Z"
+                    ></path></svg
+                  >Мои заказы</a
+                ><a class="sidebar__nav-link" href="#"
+                  ><svg viewBox="0 0 24 24" fill="currentColor" class="sidebar__nav-icon">
+                    <path
+                      d="M19 14V6a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2v8c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2Zm-9-1a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm13-6v11a2 2 0 0 1-2 2H4v-2h17V7h2Z"
+                    ></path></svg
+                  >Способы оплаты</a
+                ><a class="sidebar__nav-link" href="#"
+                  ><svg viewBox="0 0 24 24" fill="currentColor" class="sidebar__nav-icon">
+                    <path
+                      d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6Zm16-4H8a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Zm-1 9H9V9h10v2Zm-4 4H9v-2h6v2Zm4-8H9V5h10v2Z"
+                    ></path></svg
+                  >Новости</a
+                ><a class="sidebar__nav-link" href="#"
+                  ><svg viewBox="0 0 24 24" fill="currentColor" class="sidebar__nav-icon">
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M21 1H3a2 2 0 0 0-2 2v18c0 1.1.9 2 2 2h18a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 7h10v3l4-4-4-4v3H5v6h2V7Zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4Z"
+                    ></path></svg
+                  >Взаиморасчеты</a
+                ><a class="sidebar__nav-link" href="#"
+                  ><svg viewBox="0 0 24 24" fill="currentColor" class="sidebar__nav-icon">
+                    <path
+                      d="M20 2H4a2 2 0 0 0-1.99 2L2 22l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2ZM8 14H6v-2h2v2Zm0-3H6V9h2v2Zm0-3H6V6h2v2Zm7 6h-5v-2h5v2Zm3-3h-8V9h8v2Zm0-3h-8V6h8v2Z"
+                    ></path></svg
+                  >Вопрос-ответ</a
+                ><a class="sidebar__nav-link" href="#"
+                  ><svg viewBox="0 0 24 24" fill="currentColor" class="sidebar__nav-icon">
+                    <path
+                      d="M19 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-5.97 4.06L14.09 6l1.41 1.41L16.91 6l1.06 1.06-1.41 1.41 1.41 1.41-1.06 1.06-1.41-1.4-1.41 1.41-1.06-1.06 1.41-1.41-1.41-1.42Zm-6.78.66h5v1.5h-5v-1.5ZM11.5 16h-2v2H8v-2H6v-1.5h2v-2h1.5v2h2V16Zm6.5 1.25h-5v-1.5h5v1.5Zm0-2.5h-5v-1.5h5v1.5Z"
+                    ></path></svg
+                  >Калькулятор доставки</a
+                >
+              </nav>
+            </div>
+            <label for="sidebar-toggle" class="sidebar__overlay"></label>
+          </div>
+          <div class="layout__main">
+            <div class="info-bar">
+              <div class="info-bar__item">
+                <div class="info-bar__item-main">
+                  Баланс по заказам<span class="info-bar__item-value">123 456 ¥</span>
+                </div>
+              </div>
+              <div class="info-bar__item">
+                <div class="info-bar__item-main">
+                  Курс ¥<span class="info-bar__item-value">13.10 ₽</span>
+                </div>
+                <div class="info-bar__item-side">
+                  15.01.2024<button class="info-bar__item-refresh" type="button">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="info-bar__item-icon">
+                      <path
+                        d="m19 8-4 4h3a6 6 0 0 1-8.8 5.3l-1.46 1.46A8 8 0 0 0 20 12h3l-4-4ZM6 12a6 6 0 0 1 8.8-5.3l1.46-1.46A8 8 0 0 0 4 12H1l4 4 4-4H6Z"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="info-bar__search">
+                <form class="search">
+                  <input
+                    class="search__input"
+                    type="text"
+                    required
+                    placeholder="Название заказа, № заказа или позиции"
+                  />
+                  <div class="search__addon">
+                    <svg viewBox="0 0 24 24" fill="none" class="search__icon">
+                      <g clip-path="url(#search_svg__a)">
+                        <path
+                          d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0a4.5 4.5 0 1 1-.01-8.99A4.5 4.5 0 0 1 9.5 14Z"
+                          fill="#989898"
+                        ></path>
+                      </g>
+                      <defs>
+                        <clipPath id="search_svg__a">
+                          <path fill="#fff" d="M0 0h24v24H0z"></path>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </form>
+                <label class="hamburger"
+                  ><span class="hamburger__bar"></span><span class="hamburger__bar"></span
+                  ><span class="hamburger__bar"></span
+                  ><input type="checkbox" id="sidebar-toggle" class="sr-only"
+                /></label>
+              </div>
+            </div>
+            <hr class="layout__divider" />
+            <nav class="layout__breadcrumb"><a href="#">Главная</a> / Мои заказы</nav>
+            <div class="layout__head"><h1 class="layout__title">Мои заказы</h1></div>
+            <div class="order">
+              <div class="order__content">
+                <div class="order__status">
+                  <div class="order-stage">
+                    <div class="order-stage__legend">Статус заказа</div>
+                    <div class="order-stage__items">
+                      <div class="order-stage__item">
+                        <div class="order-stage__circle">
+                          <svg viewBox="0 0 20 20" fill="currentColor" class="order-stage__icon">
+                            <path
+                              d="M8.25 12.13 5.69 9.57l-.86.85 3.42 3.42 7.31-7.32-.85-.85-6.46 6.46Z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <p class="order-stage__label">Заявка создана</p>
+                      </div>
+                      <div class="order-stage__item">
+                        <div class="order-stage__circle">
+                          <svg viewBox="0 0 20 20" fill="currentColor" class="order-stage__icon">
+                            <path
+                              d="M8.25 12.13 5.69 9.57l-.86.85 3.42 3.42 7.31-7.32-.85-.85-6.46 6.46Z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <p class="order-stage__label">Проверка бланка</p>
+                      </div>
+                      <div class="order-stage__item" data-state="current">
+                        <div class="order-stage__circle">
+                          <svg viewBox="0 0 20 20" fill="currentColor" class="order-stage__icon">
+                            <path
+                              d="M8.25 12.13 5.69 9.57l-.86.85 3.42 3.42 7.31-7.32-.85-.85-6.46 6.46Z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <p class="order-stage__label">Оплачено</p>
+                      </div>
+                      <div class="order-stage__item">
+                        <div class="order-stage__circle">
+                          <svg viewBox="0 0 20 20" fill="currentColor" class="order-stage__icon">
+                            <path
+                              d="M8.25 12.13 5.69 9.57l-.86.85 3.42 3.42 7.31-7.32-.85-.85-6.46 6.46Z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <p class="order-stage__label">Выкуп</p>
+                      </div>
+                      <div class="order-stage__item">
+                        <div class="order-stage__circle">
+                          <svg viewBox="0 0 20 20" fill="currentColor" class="order-stage__icon">
+                            <path
+                              d="M8.25 12.13 5.69 9.57l-.86.85 3.42 3.42 7.31-7.32-.85-.85-6.46 6.46Z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <p class="order-stage__label">Прибыло на склад</p>
+                      </div>
+                      <div class="order-stage__item">
+                        <div class="order-stage__circle">
+                          <svg viewBox="0 0 20 20" fill="currentColor" class="order-stage__icon">
+                            <path
+                              d="M8.25 12.13 5.69 9.57l-.86.85 3.42 3.42 7.31-7.32-.85-.85-6.46 6.46Z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <p class="order-stage__label">Отправлено из Китая</p>
+                      </div>
+                      <div class="order-stage__item">
+                        <div class="order-stage__circle">
+                          <svg viewBox="0 0 20 20" fill="currentColor" class="order-stage__icon">
+                            <path
+                              d="M8.25 12.13 5.69 9.57l-.86.85 3.42 3.42 7.31-7.32-.85-.85-6.46 6.46Z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <p class="order-stage__label">Доставлено в России</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="order__address">
+                  <details class="address" open>
+                    <summary class="button button_primary button_md add-button address__target">
+                      <svg viewBox="0 0 24 24" fill="none" class="add-button__icon">
+                        <g clip-path="url(#published_svg__a)">
+                          <path
+                            d="m17.66 9.53-7.07 7.07-4.24-4.24 1.41-1.41 2.83 2.83 5.66-5.66 1.41 1.41ZM4 12a7.95 7.95 0 0 1 2.62-5.88L9 8.5v-6H3l2.2 2.2A10 10 0 0 0 11 21.95v-2.02A8 8 0 0 1 4 12Zm18 0a10 10 0 0 0-9-9.95v2.02a7.95 7.95 0 0 1 4.38 13.81L15 15.5v6h6l-2.2-2.2A9.93 9.93 0 0 0 22 12Z"
+                            fill="#fff"
+                          ></path>
+                        </g>
+                        <defs>
+                          <clipPath id="published_svg__a">
+                            <path fill="#fff" d="M0 0h24v24H0z"></path>
+                          </clipPath>
+                        </defs></svg
+                      >Адрес доставки
+                    </summary>
+                    <div class="address__content">
+                      <p class="address__text">
+                        РФ, г. Красноярск, ул. Карла Маркса 24, кор.Б, кв.5
+                      </p>
+                    </div>
+                  </details>
+                  <dialog class="dialog" id="createAddress">
+                    <form method="dialog">
+                      <button class="dialog__close">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path
+                            d="M15.59 7 12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41 15.59 7Z"
+                          ></path>
+                        </svg>
+                      </button>
+                    </form>
+                    <div class="dialog__inner">
+                      <h3 class="dialog__title">Добавить адрес доставки</h3>
+                      <form class="create-address">
+                        <div class="grid gap-5 sm:grid-cols-2">
+                          <div class="field col-span-full">
+                            <label class="label" for="input-country">Страна:</label
+                            ><input
+                              class="input"
+                              type="text"
+                              id="input-country"
+                              name="country"
+                              required
+                            />
+                          </div>
+                          <div class="field">
+                            <label class="label" for="input-city">Город:</label
+                            ><input
+                              class="input"
+                              type="text"
+                              id="input-city"
+                              name="city"
+                              required
+                            />
+                          </div>
+                          <div class="field">
+                            <label class="label" for="input-street">Улица:</label
+                            ><input
+                              class="input"
+                              type="text"
+                              id="input-street"
+                              name="street"
+                              required
+                            />
+                          </div>
+                          <div class="field">
+                            <label class="label" for="input-building">Корпус:</label
+                            ><input
+                              class="input"
+                              type="text"
+                              id="input-building"
+                              name="building"
+                              required
+                            />
+                          </div>
+                          <div class="field">
+                            <label class="label" for="input-apartment">Квартира, дом:</label
+                            ><input
+                              class="input"
+                              type="text"
+                              id="input-apartment"
+                              name="apartment"
+                              required
+                            />
+                          </div>
+                          <button class="button button_primary button_md" type="submit">
+                            Добавить адрес</button
+                          ><button
+                            class="button button_secondary button_md"
+                            onclick="this.closest('dialog').close()"
+                            type="reset"
+                          >
+                            Отменить
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </dialog>
+                </div>
+                <div class="order__specs-wrap">
+                  <div class="specs">
+                    <h3 class="specs__head">Общая информация о заказе</h3>
+                    <div class="specs__content">
+                      <dl>
+                        <dt>ФИО:</dt>
+                        <dd>Иванов Иван Иванович</dd>
+                        <dt>Адрес доставки:</dt>
+                        <dd>РФ, г.Москва, ул. Ленина 1</dd>
+                        <dt>Телефон:</dt>
+                        <dd>+7 912 345 67 89</dd>
+                        <dt>Email:</dt>
+                        <dd>ivanivanov@mail.ru</dd>
+                        <dt>Вес заказа:</dt>
+                        <dd>50 кг</dd>
+                        <dt>Способ доставки:</dt>
+                        <dd>Авиадоставка</dd>
+                        <dt>Статус:</dt>
+                        <dd>
+                          <div class="order-status order-status_created">
+                            <span class="order-status__text">Заявка создана</span>
+                          </div>
+                        </dd>
+                      </dl>
+                    </div>
+                  </div>
+                </div>
+                <div class="order__specs-wrap">
+                  <div class="specs">
+                    <h3 class="specs__head">Финансовая информация о заказе</h3>
+                    <div class="specs__content">
+                      <dl>
+                        <dt>Комиссия:</dt>
+                        <dd>1 234 ¥</dd>
+                        <dt>Оплачено</dt>
+                        <dd>123 456 ¥</dd>
+                        <dt>Курс ¥</dt>
+                        <dd>13.10 ¥</dd>
+                        <dt>Баланс ¥</dt>
+                        <dd>123 456 ¥</dd>
+                        <dt>Баланс ₽</dt>
+                        <dd>12 345 ¥</dd>
+                        <dt>Общая сумма заказа:</dt>
+                        <dd>123 456 789 ¥</dd>
+                      </dl>
+                    </div>
+                  </div>
+                </div>
+                <div class="order__export-wrap">
+                  <a class="button button_tertiary button_md add-button w-full" href="#"
+                    ><svg viewBox="0 0 25 24" fill="currentColor" class="add-button__icon">
+                      <path
+                        d="M16.97 9h-1.6V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5H7.8a1 1 0 0 0-.71 1.71l4.59 4.59a1 1 0 0 0 1.4 0l4.6-4.59a1 1 0 0 0-.7-1.71ZM5.37 19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1 1 1 0 0 0-1-1h-12a1 1 0 0 0-1 1Z"
+                      ></path></svg
+                    >Экспорт заказа в Exel (xslx)</a
+                  >
+                </div>
+              </div>
+              <div class="order__section">
+                <h2 class="order__subtitle">Позиции</h2>
+                <div class="inventory">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>№</th>
+                        <th>Ссылка</th>
+                        <th>Дата</th>
+                        <th>Цена</th>
+                        <th>Кол-во</th>
+                        <th>Доставка по Китаю</th>
+                        <th>Сумма</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><a class="inventory__link" href="order"></a>1</td>
+                        <td>
+                          <a href="#" class="product-inline"
+                            ><img src="https://placehold.co/40" class="product-inline__img" />
+                            <p class="product-inline__name">Название товара</p></a
+                          >
+                        </td>
+                        <td>15.01.2024</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>7</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>
+                          <div class="order__group">
+                            <nobr>123 456 ¥</nobr>
+                            <div class="edit-controls">
+                              <button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M2.5 14.38v3.12h3.13l9.21-9.22-3.12-3.12-9.22 9.21Zm14.76-8.51a.83.83 0 0 0 0-1.18L15.3 2.74a.83.83 0 0 0-1.18 0L12.6 4.27l3.12 3.12 1.53-1.52Z"
+                                  ></path>
+                                </svg></button
+                              ><button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M5 15.83c0 .92.75 1.67 1.67 1.67h6.66c.92 0 1.67-.75 1.67-1.67v-10H5v10Zm10.83-12.5h-2.91l-.84-.83H7.92l-.84.83H4.17V5h11.66V3.33Z"
+                                  ></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><a class="inventory__link" href="order"></a>2</td>
+                        <td>
+                          <a href="#" class="product-inline"
+                            ><img src="https://placehold.co/40" class="product-inline__img" />
+                            <p class="product-inline__name">Название товара</p></a
+                          >
+                        </td>
+                        <td>15.01.2024</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>7</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>
+                          <div class="order__group">
+                            <nobr>123 456 ¥</nobr>
+                            <div class="edit-controls">
+                              <button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M2.5 14.38v3.12h3.13l9.21-9.22-3.12-3.12-9.22 9.21Zm14.76-8.51a.83.83 0 0 0 0-1.18L15.3 2.74a.83.83 0 0 0-1.18 0L12.6 4.27l3.12 3.12 1.53-1.52Z"
+                                  ></path>
+                                </svg></button
+                              ><button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M5 15.83c0 .92.75 1.67 1.67 1.67h6.66c.92 0 1.67-.75 1.67-1.67v-10H5v10Zm10.83-12.5h-2.91l-.84-.83H7.92l-.84.83H4.17V5h11.66V3.33Z"
+                                  ></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><a class="inventory__link" href="order"></a>3</td>
+                        <td>
+                          <a href="#" class="product-inline"
+                            ><img src="https://placehold.co/40" class="product-inline__img" />
+                            <p class="product-inline__name">Название товара</p></a
+                          >
+                        </td>
+                        <td>15.01.2024</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>7</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>
+                          <div class="order__group">
+                            <nobr>123 456 ¥</nobr>
+                            <div class="edit-controls">
+                              <button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M2.5 14.38v3.12h3.13l9.21-9.22-3.12-3.12-9.22 9.21Zm14.76-8.51a.83.83 0 0 0 0-1.18L15.3 2.74a.83.83 0 0 0-1.18 0L12.6 4.27l3.12 3.12 1.53-1.52Z"
+                                  ></path>
+                                </svg></button
+                              ><button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M5 15.83c0 .92.75 1.67 1.67 1.67h6.66c.92 0 1.67-.75 1.67-1.67v-10H5v10Zm10.83-12.5h-2.91l-.84-.83H7.92l-.84.83H4.17V5h11.66V3.33Z"
+                                  ></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><a class="inventory__link" href="order"></a>4</td>
+                        <td>
+                          <a href="#" class="product-inline"
+                            ><img src="https://placehold.co/40" class="product-inline__img" />
+                            <p class="product-inline__name">Название товара</p></a
+                          >
+                        </td>
+                        <td>15.01.2024</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>7</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>
+                          <div class="order__group">
+                            <nobr>123 456 ¥</nobr>
+                            <div class="edit-controls">
+                              <button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M2.5 14.38v3.12h3.13l9.21-9.22-3.12-3.12-9.22 9.21Zm14.76-8.51a.83.83 0 0 0 0-1.18L15.3 2.74a.83.83 0 0 0-1.18 0L12.6 4.27l3.12 3.12 1.53-1.52Z"
+                                  ></path>
+                                </svg></button
+                              ><button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M5 15.83c0 .92.75 1.67 1.67 1.67h6.66c.92 0 1.67-.75 1.67-1.67v-10H5v10Zm10.83-12.5h-2.91l-.84-.83H7.92l-.84.83H4.17V5h11.66V3.33Z"
+                                  ></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><a class="inventory__link" href="order"></a>5</td>
+                        <td>
+                          <a href="#" class="product-inline"
+                            ><img src="https://placehold.co/40" class="product-inline__img" />
+                            <p class="product-inline__name">Название товара</p></a
+                          >
+                        </td>
+                        <td>15.01.2024</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>7</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>
+                          <div class="order__group">
+                            <nobr>123 456 ¥</nobr>
+                            <div class="edit-controls">
+                              <button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M2.5 14.38v3.12h3.13l9.21-9.22-3.12-3.12-9.22 9.21Zm14.76-8.51a.83.83 0 0 0 0-1.18L15.3 2.74a.83.83 0 0 0-1.18 0L12.6 4.27l3.12 3.12 1.53-1.52Z"
+                                  ></path>
+                                </svg></button
+                              ><button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M5 15.83c0 .92.75 1.67 1.67 1.67h6.66c.92 0 1.67-.75 1.67-1.67v-10H5v10Zm10.83-12.5h-2.91l-.84-.83H7.92l-.84.83H4.17V5h11.66V3.33Z"
+                                  ></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><a class="inventory__link" href="order"></a>6</td>
+                        <td>
+                          <a href="#" class="product-inline"
+                            ><img src="https://placehold.co/40" class="product-inline__img" />
+                            <p class="product-inline__name">Название товара</p></a
+                          >
+                        </td>
+                        <td>15.01.2024</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>7</td>
+                        <td><nobr>12 345 ¥</nobr></td>
+                        <td>
+                          <div class="order__group">
+                            <nobr>123 456 ¥</nobr>
+                            <div class="edit-controls">
+                              <button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M2.5 14.38v3.12h3.13l9.21-9.22-3.12-3.12-9.22 9.21Zm14.76-8.51a.83.83 0 0 0 0-1.18L15.3 2.74a.83.83 0 0 0-1.18 0L12.6 4.27l3.12 3.12 1.53-1.52Z"
+                                  ></path>
+                                </svg></button
+                              ><button type="button" class="edit-controls__button">
+                                <svg
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  class="edit-controls__icon"
+                                >
+                                  <path
+                                    d="M5 15.83c0 .92.75 1.67 1.67 1.67h6.66c.92 0 1.67-.75 1.67-1.67v-10H5v10Zm10.83-12.5h-2.91l-.84-.83H7.92l-.84.83H4.17V5h11.66V3.33Z"
+                                  ></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="order__actions">
+                <div class="order__actions-col">
+                  <button class="button button_secondary button_md w-full" type="button">
+                    Отменить заказ
+                  </button>
+                  <p class="order__note">
+                    Если заказ не перешел в статус «Выкуп», вы можете редактировать или отменить его
+                  </p>
+                </div>
+                <div class="order__actions-col">
+                  <button class="button button_secondary button_md w-full" type="button">
+                    Редактировать заказ
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -2,25 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\AuthService;
+use App\Interfaces\Services\UserServiceInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    protected AuthService $authService;
+    private UserServiceInterface $userService;
 
-    public function __construct(AuthService $authService)
+    public function __construct(UserServiceInterface $userService)
     {
-        $this->authService = $authService;
+        $this->userService = $userService;
     }
 
-    public function showLoginForm()
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showLoginForm(): View
     {
         return view('front.login');
     }
 
+    /**
+     * Show the application registration form.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return RedirectResponse
+     */
     public function register(Request $request): RedirectResponse
     {
         $request->validate([
@@ -28,13 +40,19 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        $user = $this->authService->register($request->all());
+        $user = $this->userService->registerUser($request->all());
 
         Auth::login($user);
 
         return redirect()->intended('/');
     }
 
+    /**
+     * Show the application login form.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return RedirectResponse
+     */
     public function login(Request $request): RedirectResponse
     {
         $request->validate([
@@ -42,7 +60,7 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        if ($this->authService->login($request->only('email', 'password'))) {
+        if ($this->userService->login($request->only('email', 'password'))) {
             return redirect()->intended('/profile');
         }
 
@@ -53,7 +71,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $this->authService->logout();
+        $this->userService->logout();
 
         return redirect('/login');
     }

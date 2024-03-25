@@ -17,7 +17,7 @@
                         <h5>{{ __('messages.my_data') }}</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('profile.update') }}" method="POST">
+                        <form action="/" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="name">{{ __('messages.name_label') }}</label>
