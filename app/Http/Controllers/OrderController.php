@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrderExport;
 use App\Http\Requests\CreateOrderItemRequest;
 use App\Interfaces\Services\UserProfileServiceInterface;
 use App\Interfaces\Services\UserServiceInterface;
