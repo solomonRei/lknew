@@ -869,9 +869,9 @@
 
                             showSuccessAlert(response.message);
 
-                            // setTimeout(function () {
-                            //     window.location.reload();
-                            // }, 2000);
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 2000);
                         } else {
                             alert('Item edited but no ID returned');
                         }
