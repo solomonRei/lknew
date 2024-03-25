@@ -27,7 +27,7 @@ class AddAddressRequest extends FormRequest
             'delivery-country' => 'required|string|max:255',
             'delivery-city' => 'required|string|max:255',
             'delivery-street' => 'required|string|max:255',
-            'delivery-building' => 'required|string|max:255',
+            'delivery-building' => 'nullable|string|max:255',
             'delivery-apartment' => 'nullable|string|max:255',
         ];
     }
@@ -38,7 +38,7 @@ class AddAddressRequest extends FormRequest
             'delivery-country.required' => 'Страна обязательна к заполнению.',
             'delivery-city.required' => 'Город обязателен к заполнению.',
             'delivery-street.required' => 'Улица обязательна к заполнению.',
-            'delivery-building.required' => 'Корпус/дом обязателен к заполнению.',
+            'delivery-building.nullable' => 'Корпус/дом не обязателен к заполнению.',
             'delivery-apartment.nullable' => 'Квартира/офис не обязателен к заполнению.',
         ];
     }
