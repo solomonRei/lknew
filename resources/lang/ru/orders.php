@@ -2,7 +2,7 @@
 
 return [
     'status' => [
-        'not_created' => 'Не создан',
+        'not_created' => 'Черновик',
         'created' => 'Заявка создана',
         'pending' => 'В ожидании',
         'completed' => 'Завершён',

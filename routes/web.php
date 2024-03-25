@@ -19,9 +19,7 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('/', function () {
-    return view('front.home');
-})->name('home');
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('auth.index');
 
 
 Route::get('/language/{lang}', function ($lang) {
@@ -60,16 +58,19 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+    Route::get('/orders/edit/{orderId}', [OrderController::class, 'edit'])->name('orders.edit');
     Route::post('/order/store', [OrderController::class, 'storeItem'])->name('orders.storeItem');
     Route::get('/order/{orderId}/items', [OrderController::class, 'getOrderItems'])->name('orders.getItems');
     Route::post('/orders/complete', [OrderController::class, 'completeOrder'])->name('orders.complete');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('order.show');
     Route::get('/orders/{order}/export', [OrderController::class, 'export'])->name('orders.export');
-
+    Route::post('/order/item/{itemId}/update', [OrderController::class, 'updateItem'])->name('orders.updateItem');
+    Route::delete('/order-item/{itemId}/delete', [OrderController::class, 'deleteItem'])->name('order.item.delete');
 
 //    Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
 //    Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/item/get/{itemId}', [OrderController::class, 'getItem'])->name('item.get');
 //
 //    Route::get('/orders', function () {
 //        return view('front.orders');

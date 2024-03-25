@@ -65,6 +65,7 @@
                     <div class="order-stage__items">
                         @php
                             $stages = [
+                                'not_created' => 'Черновик',
                                 'pending' => 'Заявка создана',
                                 'checked' => 'Проверка бланка',
                                 'paid' => 'Оплачено',
@@ -73,7 +74,7 @@
                                 'shipped' => 'Отправлено из Китая',
                                 'delivered' => 'Доставлено в России'
                             ];
-                            $currentStatus = $order->status ?? 'pending';
+                            $currentStatus = $order->status ?? 'not_created';
                         @endphp
                         @foreach($stages as $status => $label)
                             <div class="order-stage__item" @if($status === $currentStatus) data-state="current" @endif>
@@ -206,18 +207,6 @@
                             <td>
                                 <div class="order__group">
                                     <nobr>{{ number_format($item->total_price, 2) }} ¥</nobr>
-                                    <div class="edit-controls">
-                                        <button type="button" class="edit-controls__button">
-                                            <svg viewBox="0 0 20 20" fill="currentColor" class="edit-controls__icon">
-                                                <path d="M2.5 14.38v3.12h3.13l9.21-9.22-3.12-3.12-9.22 9.21Zm14.76-8.51a.83.83 0 0 0 0-1.18L15.3 2.74a.83.83 0 0 0-1.18 0L12.6 4.27l3.12 3.12 1.53-1.52Z"></path>
-                                            </svg>
-                                        </button>
-                                        <button type="button" class="edit-controls__button">
-                                            <svg viewBox="0 0 20 20" fill="currentColor" class="edit-controls__icon">
-                                                <path d="M5 15.83c0 .92.75 1.67 1.67 1.67h6.66c.92 0 1.67-.75 1.67-1.67v-10H5v10Zm10.83-12.5h-2.91l-.84-.83H7.92l-.84.83H4.17V5h11.66V3.33Z"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -236,10 +225,22 @@
                 </p>
             </div>
             <div class="order__actions-col">
-                <button class="button button_secondary button_md w-full" type="button">
+                <button class="button button_secondary button_md w-full" type="button" data-order-id="{{ $order->id }}">
                     Редактировать заказ
                 </button>
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.order__actions-col .button').click(function() {
+                var orderId = $(this).data('order-id');
+                if (orderId) {
+                    window.location.href = `/orders/edit/${orderId}`;
+                }
+            });
+        });
+    </script>
 @endsection

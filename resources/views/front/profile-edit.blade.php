@@ -62,7 +62,7 @@
                         <div class="field">
                             <label class="label" for="input-email">Email:</label
                             ><input class="input" type="text" id="input-email" name="email"
-                                    value="{{ $profile->email ?? ''}}" readonly/>
+                                    value="{{ $user->email ?? ''}}" readonly/>
                         </div>
                     </div>
                     <div class="mt-10">

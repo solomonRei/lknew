@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Exports\OrderExport;
 use App\Http\Requests\CreateOrderItemRequest;
+use App\Http\Requests\OrderEditRequest;
+use App\Http\Requests\OrderItemGetRequest;
+use App\Http\Requests\UpdateOrderItemRequest;
 use App\Interfaces\Services\UserProfileServiceInterface;
 use App\Interfaces\Services\UserServiceInterface;
 use App\Models\Address;
@@ -29,6 +32,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with('items')
+            ->where('user_id', $this->userService->getCurrentUser()->id)
             ->orderByRaw("CASE WHEN status = 'not_created' THEN 0 ELSE 1 END, updated_at DESC")
             ->get();
 
@@ -40,6 +44,16 @@ class OrderController extends Controller
         return view('front.orders.create');
     }
 
+    public function edit(OrderEditRequest $request)
+    {
+        $orderId = $request->route('orderId');
+        $order = Order::with(['items.photos', 'user.profile.phones' => function ($query) {
+            $query->where('is_active', true)->latest()->limit(1);
+        }, 'address'])->findOrFail($orderId);
+
+        return view('front.orders.edit', compact('order'));
+    }
+
     public function show(Order $order)
     {
         $order->load(['items.photos', 'user.profile.phones' => function ($query) {
@@ -48,6 +62,23 @@ class OrderController extends Controller
 
         return view('front.orders.show', compact('order'));
     }
+
+    public function getItem(OrderItemGetRequest $request)
+    {
+        $itemId = $request->route('itemId');
+        $orderItem = OrderItem::with('photos')->find($itemId);
+        if (!$orderItem) {
+            return response()->json(['error' => 'Item not found'], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'orderItem' => $orderItem,
+            ],
+        ]);
+    }
+
 
     public function export(Order $order)
     {
@@ -96,6 +127,69 @@ class OrderController extends Controller
         ]);
     }
 
+    public function deleteItem($itemId)
+    {
+        $item = OrderItem::find($itemId);
+        if (!$item) {
+            return response()->json(['success' => false, 'message' => 'Позиция не найдена.']);
+        }
+
+        $item->delete();
+        return response()->json(['success' => true, 'message' => 'Позиция успешно удалена.']);
+    }
+
+    public function updateItem(UpdateOrderItemRequest $request, $itemId)
+    {
+        $validated = $request->validated();
+
+        $orderItem = OrderItem::find($itemId);
+        if (!$orderItem) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Позиция не найдена.',
+            ], 404);
+        }
+
+        $order = $orderItem->order;
+        if ($order->user_id !== auth()->id()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Нет доступа к этой позиции.',
+            ], 403);
+        }
+
+        $orderItem->fill([
+            'link' => $validated['link'],
+            'name' => $validated['name'],
+            'price' => $validated['price'],
+            'quantity' => $validated['quantity'],
+            'is_photo_report' => $request->input('edit_is_photo_report') == '1',
+            'is_measure' => $request->input('edit_is_measure') == '1',
+            'is_lathing' => $request->input('edit_is_lathing') == '1',
+            'is_bubble_wrap' => $request->input('edit_is_bubble_wrap') == '1',
+            'is_comment' => $request->input('edit_is_comment') == '1',
+        ]);
+        $orderItem->total_price = $orderItem->price * $orderItem->quantity;
+        $orderItem->save();
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('order_items', $filename, 'public');
+
+            $photo = $orderItem->photos()->firstOrCreate([], ['file_path' => $path]);
+            $photo->file_path = $path;
+            $photo->save();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Позиция успешно обновлена.',
+            'data' => [
+                'orderItem' => $orderItem->fresh(),
+                ]
+        ]);
+    }
 
     public function getOrderItems($orderId)
     {

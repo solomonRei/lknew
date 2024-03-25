@@ -18,11 +18,9 @@
     data-alert-ok="{{ __('messages.alert.ok') }}"
     id="alertTranslations" style="display: none;">
 </div>
-@include('components.header')
 <main class="py-4">
     @yield('content')
 </main>
-{{--@include('components.footer')--}}
 </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     @yield('scripts')
