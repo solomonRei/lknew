@@ -17,11 +17,12 @@ class UserProfile extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'phone',
         'telegram_chat_id',
         'city',
+        'balance',
         'address',
         'passport_data',
+        'avatar',
     ];
 
     /**
@@ -36,6 +37,16 @@ class UserProfile extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function phones()
+    {
+        return $this->hasMany(Phone::class);
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
     }
 
 }

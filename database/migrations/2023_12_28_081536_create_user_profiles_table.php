@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('telegram_chat_id')->nullable();
             $table->string('city')->nullable();
-            $table->string('address')->nullable();
+            $table->string('telegram_chat_id')->nullable();
+            $table->decimal('balance', 8, 2)->default(0)->nullable();
+            $table->binary('avatar')->nullable();
             $table->string('passport_data')->nullable();
             $table->timestamps();
         });

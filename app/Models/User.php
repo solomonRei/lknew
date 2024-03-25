@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
+        'google2fa_secret',
     ];
 
     /**
@@ -30,6 +31,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'google2fa_secret',
     ];
 
     /**
@@ -44,6 +46,12 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(UserProfile::class);
+    }
+
+    public static function getBalance($id)
+    {
+        $user = User::find($id);
+        return $user->balance;
     }
 
 }

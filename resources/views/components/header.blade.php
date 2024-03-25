@@ -12,7 +12,7 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('home') }}">{{ __('messages.breadcrumbs.home') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('orders') }}">{{ __('messages.breadcrumbs.orders') }}</a>
+{{--                        <a class="nav-link" href="{{ route('orders') }}">{{ __('messages.breadcrumbs.orders') }}</a>--}}
                     </li>
                         @endif
                 </ul>
@@ -23,7 +23,7 @@
                             {{ __('messages.breadcrumbs.profile') }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('profile.index') }}">{{  Auth::user()->email}}</a></li>
+{{--                            <li><a class="dropdown-item" href="{{ route('profile.index') }}">{{  Auth::user()->email}}</a></li>--}}
 
                         </ul>
 
@@ -40,7 +40,7 @@
                     </ul>
                 </div>
                 @if(\Auth::check())
-                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    <form action="/" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-warning">{{ __('messages.auth.logout') }}</button>
                     </form>
