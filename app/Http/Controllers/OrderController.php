@@ -33,6 +33,8 @@ class OrderController extends Controller
     {
         $orders = Order::with('items')
             ->where('user_id', $this->userService->getCurrentUser()->id)
+            ->where('status', '!=', 'canceled')
+            ->where('status', '!=', 'deleted')
             ->orderByRaw("CASE WHEN status = 'not_created' THEN 0 ELSE 1 END, updated_at DESC")
             ->get();
 
@@ -287,5 +289,40 @@ class OrderController extends Controller
             'searchTerm' => $searchTerm,
         ]);
     }
+
+    public function cancelOrder(Request $request, $orderId)
+    {
+        $order = Order::find($orderId);
+        if (!$order) {
+            return response()->json(['success' => false, 'message' => 'Заказ не найден.']);
+        }
+
+        if ($order->user_id != auth()->id()) {
+            return response()->json(['success' => false, 'message' => 'Unauthorized']);
+        }
+
+        $order->status = 'cancelled';
+        $order->save();
+
+        return response()->json(['success' => true, 'message' => 'Заказ отменен.']);
+    }
+
+    public function deleteOrder(Request $request, $orderId)
+    {
+        $order = Order::find($orderId);
+        if (!$order) {
+            return response()->json(['success' => false, 'message' => 'Заказ не найден.']);
+        }
+
+        if ($order->user_id != auth()->id()) {
+            return response()->json(['success' => false, 'message' => 'Unauthorized']);
+        }
+
+        $order->status = 'deleted';
+        $order->save();
+
+        return response()->json(['success' => true, 'message' => 'Заказ удален.']);
+    }
+
 
 }

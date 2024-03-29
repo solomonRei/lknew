@@ -4,7 +4,7 @@
 
 @section('content')
     @include('components.info-bar')
-    <hr class="layout__divider" />
+    <hr class="layout__divider"/>
     <nav class="layout__breadcrumb"><a href="#">Главная</a> / Заказы / Заказ #{{ $order->id }}</nav>
     <div class="layout__head"><h1 class="layout__title">Заказ #{{ $order->id }}</h1></div>
     <div class="order">
@@ -14,23 +14,37 @@
                     <div class="order-stage__legend">Статус заказа</div>
                     <div class="order-stage__items">
                         @php
-                            $stages = [
-                                'not_created' => 'Черновик',
-                                'pending' => 'Заявка создана',
-                                'checked' => 'Проверка бланка',
-                                'paid' => 'Оплачено',
-                                'purchased' => 'Выкуп',
-                                'warehouse' => 'Прибыло на склад',
-                                'shipped' => 'Отправлено из Китая',
-                                'delivered' => 'Доставлено в России'
-                            ];
-                            $currentStatus = $order->status ?? 'not_created';
+                            if ($order->status === 'deleted') {
+                                $stages = [
+                                    'deleted' => 'Удален',
+                                ];
+                                $currentStatus = $order->status;
+
+                            }elseif($order->status === 'cancelled') {
+                                $stages = [
+                                    'cancelled' => 'Отменен',
+                                ];
+                                $currentStatus = $order->status;
+                            } else {
+                                $stages = [
+                                    'not_created' => 'Черновик',
+                                    'pending' => 'Заявка создана',
+                                    'checked' => 'Проверка бланка',
+                                    'paid' => 'Оплачено',
+                                    'purchased' => 'Выкуп',
+                                    'warehouse' => 'Прибыло на склад',
+                                    'shipped' => 'Отправлено из Китая',
+                                    'delivered' => 'Доставлено в России'
+                                ];
+                                $currentStatus = $order->status ?? 'not_created';
+                                }
                         @endphp
                         @foreach($stages as $status => $label)
                             <div class="order-stage__item" @if($status === $currentStatus) data-state="current" @endif>
                                 <div class="order-stage__circle">
                                     <svg viewBox="0 0 20 20" fill="currentColor" class="order-stage__icon">
-                                        <path d="M8.25 12.13 5.69 9.57l-.86.85 3.42 3.42 7.31-7.32-.85-.85-6.46 6.46Z"></path>
+                                        <path
+                                            d="M8.25 12.13 5.69 9.57l-.86.85 3.42 3.42 7.31-7.32-.85-.85-6.46 6.46Z"></path>
                                     </svg>
                                 </div>
                                 <p class="order-stage__label">{{ $label }}</p>
@@ -53,8 +67,10 @@
                                 <clipPath id="published_svg__a">
                                     <path fill="#fff" d="M0 0h24v24H0z"></path>
                                 </clipPath>
-                            </defs></svg
-                        >Адрес доставки
+                            </defs>
+                        </svg
+                        >
+                        Адрес доставки
                     </summary>
                     <div class="address__content">
                         <p class="address__text">
@@ -112,12 +128,16 @@
                 </div>
             </div>
             <div class="order__export-wrap">
-                <a class="button button_tertiary button_md add-button w-full" href="{{ route('orders.export', $order->id) }}"
-                ><svg viewBox="0 0 25 24" fill="currentColor" class="add-button__icon">
+                <a class="button button_tertiary button_md add-button w-full"
+                   href="{{ route('orders.export', $order->id) }}"
+                >
+                    <svg viewBox="0 0 25 24" fill="currentColor" class="add-button__icon">
                         <path
                             d="M16.97 9h-1.6V4a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5H7.8a1 1 0 0 0-.71 1.71l4.59 4.59a1 1 0 0 0 1.4 0l4.6-4.59a1 1 0 0 0-.7-1.71ZM5.37 19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1 1 1 0 0 0-1-1h-12a1 1 0 0 0-1 1Z"
-                        ></path></svg
-                    >Экспорт заказа в Exel (xslx)</a
+                        ></path>
+                    </svg
+                    >
+                    Экспорт заказа в Exel (xslx)</a
                 >
             </div>
         </div>
@@ -143,17 +163,22 @@
                             <td>
                                 <a href="{{ $item->link }}" class="product-inline">
                                     @if($item->photos->first())
-                                        <img src="{{ asset('storage/' . $item->photos->first()->file_path) }}" class="product-inline__img" />
+                                        <img src="{{ asset('storage/' . $item->photos->first()->file_path) }}"
+                                             class="product-inline__img"/>
                                     @else
-                                        <img src="https://placehold.co/40" class="product-inline__img" />
+                                        <img src="https://placehold.co/40" class="product-inline__img"/>
                                     @endif
                                     <p class="product-inline__name">{{ $item->name }}</p>
                                 </a>
                             </td>
                             <td>{{ $item->created_at->format('d.m.Y') }}</td>
-                            <td><nobr>{{ number_format($item->price, 2) }} ¥</nobr></td>
+                            <td>
+                                <nobr>{{ number_format($item->price, 2) }} ¥</nobr>
+                            </td>
                             <td>{{ $item->quantity }}</td>
-                            <td><nobr>{{ number_format($item->domestic_shipping_cost, 2) }} ¥</nobr></td>
+                            <td>
+                                <nobr>{{ number_format($item->domestic_shipping_cost, 2) }} ¥</nobr>
+                            </td>
                             <td>
                                 <div class="order__group">
                                     <nobr>{{ number_format($item->total_price, 2) }} ¥</nobr>
@@ -165,32 +190,77 @@
                 </table>
             </div>
         </div>
-        <div class="order__actions">
-            <div class="order__actions-col">
-                <button class="button button_secondary button_md w-full" type="button">
-                    Отменить заказ
-                </button>
-                <p class="order__note">
-                    Если заказ не перешел в статус «Выкуп», вы можете редактировать или отменить его
-                </p>
+        @if($order->status !== 'cancelled' && $order->status !== 'deleted')
+            <div class="order__actions">
+                <div class="order__actions-col">
+                    <button class="button button_secondary button_md w-full delete_order_btn" type="button"
+                            data-order-id="{{ $order->id }}"
+
+                            @if($order->status === 'not_created')
+                            data-action-url="{{ route('order.delete', $order->id) }}"
+                            @else
+                            data-action-url="{{ route('order.cancel', $order->id) }}"
+                        @endif
+                    >
+                        @if($order->status === 'not_created') Удалить заказ @else Отменить заказ @endif
+                    </button>
+                    @if($order->status !== 'not_created')
+                        <p class="order__note">
+                            Если заказ не перешел в статус «Выкуп», вы можете редактировать или отменить его
+                        </p>
+                    @endif
+                </div>
+                <div class="order__actions-col">
+                    <button class="button button_secondary button_md w-full edit_order_btn" type="button"
+                            data-order-id="{{ $order->id }}">
+                        Редактировать заказ
+                    </button>
+                </div>
             </div>
-            <div class="order__actions-col">
-                <button class="button button_secondary button_md w-full" type="button" data-order-id="{{ $order->id }}">
-                    Редактировать заказ
-                </button>
-            </div>
-        </div>
+        @endif
     </div>
 @endsection
 @section('scripts')
     <script>
-        $(document).ready(function() {
-            $('.order__actions-col .button').click(function() {
+        $(document).ready(function () {
+            $('.edit_order_btn').click(function () {
                 var orderId = $(this).data('order-id');
                 if (orderId) {
                     window.location.href = `/orders/edit/${orderId}`;
                 }
             });
+
+            $('.delete_order_btn').on('click', function () {
+                const orderId = $(this).data('order-id');
+                const actionUrl = $(this).data('action-url');
+
+                if (!orderId || !actionUrl) {
+                    showErrorAlert('Некорректные данные');
+                    return;
+                }
+
+                if (confirm('Вы уверены?')) {
+                    $.ajax({
+                        url: actionUrl,
+                        type: 'POST',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            order_id: orderId
+                        },
+                        success: function (response) {
+                            showSuccessAlert(response.message);
+                            if (response.success) {
+                                window.location.reload();
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Ошибка:', error);
+                            showErrorAlert('Произошла ошибка при выполнении операции.');
+                        }
+                    });
+                }
+            });
+
         });
     </script>
 @endsection

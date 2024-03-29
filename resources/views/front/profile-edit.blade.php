@@ -2,6 +2,14 @@
 
 @section('title', 'Page Title')
 
+@section('styles')
+    <style>
+        .readonly-input {
+            color: grey;
+            background-color: #f3f3f3;
+        }
+    </style>
+@endsection
 @section('content')
     @include('components.info-bar')
     <hr class="layout__divider"/>
@@ -61,7 +69,7 @@
                         </div>
                         <div class="field">
                             <label class="label" for="input-email">Email:</label
-                            ><input class="input" type="text" id="input-email" name="email"
+                            ><input class="input readonly-input" type="text" id="input-email" name="email"
                                     value="{{ $user->email ?? ''}}" readonly/>
                         </div>
                     </div>
@@ -581,10 +589,10 @@
                     city: city,
                     email: email
                 },
-                success: function(response) {
+                success: function (response) {
                     showSuccessAlert('Профиль успешно обновлен.');
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     if (xhr.responseJSON && xhr.responseJSON.errors) {
                         let errorMessages = [];
                         Object.values(xhr.responseJSON.errors).forEach((messages) => {
@@ -717,7 +725,7 @@
                 success: function (data) {
                     if (data.success) {
                         showSuccessAlert(data.message);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             location.reload();
                         }, 5000);
                     } else {
@@ -760,7 +768,7 @@
                 success: function (response) {
                     if (response.success) {
                         showSuccessAlert(response.message);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             location.reload();
                         }, 5000);
                     } else {

@@ -35,6 +35,7 @@
             </nav>
         </div>
         <a class="button button_primary button_md add-button sidebar__create-button" href="{{ route('orders.create') }}"
+           onclick="localStorage.removeItem('currentOrderId');"
         >
             <svg viewBox="0 0 24 24" fill="currentColor" class="add-button__icon">
                 <path

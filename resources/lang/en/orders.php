@@ -7,5 +7,6 @@ return [
         'pending' => 'В ожидании',
         'completed' => 'Завершён',
         'cancelled' => 'Отменён',
+        'deleted' => 'Удалён',
     ],
 ];

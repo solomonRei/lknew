@@ -38,6 +38,7 @@ RUN chmod -R 777 /var/www
 # Grant Permissions
 RUN chown -R ${USER} /var/www
 
+RUN php artisan storage:link
 
 # Select User
 USER ${USER}

@@ -548,8 +548,16 @@
         </div>
         <div class="order__actions">
             <div class="order__actions-col">
-                <button class="button button_secondary button_md w-full" type="button" onclick="cancelOrder()">
-                    Отменить заказ
+                <button class="button button_secondary button_md w-full delete_order_btn" type="button"
+                        data-order-id="{{ $order->id }}"
+
+                        @if($order->status === 'not_created')
+                        data-action-url="{{ route('order.delete', $order->id) }}"
+                        @else
+                        data-action-url="{{ route('order.cancel', $order->id) }}"
+                    @endif
+                >
+                    @if($order->status === 'not_created') Удалить заказ @else Отменить заказ @endif
                 </button>
             </div>
             <div class="order__actions-col">
@@ -563,16 +571,6 @@
 @section('scripts')
     <script>
         localStorage.setItem('currentOrderId', '{{ $order->id }}');
-        function cancelOrder() {
-            localStorage.removeItem('currentOrderId');
-
-            const form = document.querySelector('.create-product');
-            if (form) {
-                form.reset();
-            }
-
-            window.location.href = '/orders';
-        }
         function completeOrder() {
             const orderId = localStorage.getItem('currentOrderId');
             if (!orderId) {
@@ -928,6 +926,45 @@
         });
         $(document).ready(function () {
             loadOrderItems();
+
+            $('.delete_order_btn').on('click', function () {
+                const orderId = $(this).data('order-id');
+                const actionUrl = $(this).data('action-url');
+
+                if (!orderId || !actionUrl) {
+                    showErrorAlert('Некорректные данные');
+                    return;
+                }
+
+                if (confirm('Вы уверены?')) {
+                    $.ajax({
+                        url: actionUrl,
+                        type: 'POST',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            order_id: orderId
+                        },
+                        success: function (response) {
+
+                            if (response.success) {
+                                showSuccessAlert(response.message);
+                                localStorage.removeItem('currentOrderId');
+                                const form = document.querySelector('.create-product');
+                                if (form) {
+                                    form.reset();
+                                }
+                                setTimeout(function () {
+                                    window.location.href = '/orders';
+                                }, 2000);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Ошибка:', error);
+                            showErrorAlert('Произошла ошибка при выполнении операции.');
+                        }
+                    });
+                }
+            });
         });
         $(document).ready(function () {
 

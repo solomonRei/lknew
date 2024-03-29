@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Interfaces\Services\UserServiceInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,17 +32,12 @@ class AuthController extends Controller
     /**
      * Show the application registration form.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\RegisterRequest $request
      * @return RedirectResponse
      */
-    public function register(Request $request): RedirectResponse
+    public function register(RegisterRequest $request): RedirectResponse
     {
-        $request->validate([
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-
-        $user = $this->userService->registerUser($request->all());
+        $user = $this->userService->registerUser($request->validated());
 
         Auth::login($user);
 
@@ -50,16 +47,11 @@ class AuthController extends Controller
     /**
      * Show the application login form.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\LoginRequest $request
      * @return RedirectResponse
      */
-    public function login(Request $request): RedirectResponse
+    public function login(LoginRequest $request): RedirectResponse
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-
         if ($this->userService->login($request->only('email', 'password'))) {
             return redirect()->intended('/profile');
         }

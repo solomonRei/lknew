@@ -69,14 +69,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/order/item/{itemId}/update', [OrderController::class, 'updateItem'])->name('orders.updateItem');
     Route::delete('/order-item/{itemId}/delete', [OrderController::class, 'deleteItem'])->name('order.item.delete');
     Route::get('/order/search', [OrderController::class, 'search'])->name('order.search');
+    Route::post('/order/{orderId}/cancel', [OrderController::class, 'cancelOrder'])->name('order.cancel');
+    Route::post('/order/{orderId}/delete', [OrderController::class, 'deleteOrder'])->name('order.delete');
 
 //    Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
 //    Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/item/get/{itemId}', [OrderController::class, 'getItem'])->name('item.get');
-//
-//    Route::get('/orders', function () {
-//        return view('front.orders');
-//    })->name('orders');
-//
+
 });
