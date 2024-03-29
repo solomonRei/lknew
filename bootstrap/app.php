@@ -26,6 +26,8 @@ $app = new Illuminate\Foundation\Application(
 |
 */
 
+$app->loadEnvironmentFrom(env('APP_ENV') === 'local' ? '.env.local' : '.env');
+
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
     App\Http\Kernel::class

@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('/', [AuthController::class, 'showLoginForm'])->name('auth.index');
+Route::get('/', function () {
+    return redirect()->route('auth.index');
+})->name('main');
 
 
 Route::get('/language/{lang}', function ($lang) {
