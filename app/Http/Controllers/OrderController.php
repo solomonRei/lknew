@@ -252,4 +252,40 @@ class OrderController extends Controller
             'message' => 'Заказ успешно создан.'
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('searchTerm');
+
+        $orders = Order::with('items')
+            ->where('user_id', auth()->id())
+            ->where(function($query) use ($searchTerm) {
+                $query->where('id', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('status', 'LIKE', "%{$searchTerm}%")
+                    ->orWhereHas('items', function($q) use ($searchTerm) {
+                        $q->where('name', 'LIKE', "%{$searchTerm}%");
+                    });
+            })
+            ->get();
+
+
+        $collectionOrders = $orders->map(function ($order) {
+            return [
+                'id' => $order->id,
+                'created_at' => $order->created_at->format('d.m.Y'),
+                'updated_at' => $order->updated_at->format('d.m.Y'),
+                'items_count' => $order->items->count(),
+                'total_amount' => $order->total_amount . ' ¥',
+                'user_balance' => $order->user->balance . ' ¥',
+                'status' => $order->status,
+                'status_text' => __('orders.status.' . $order->status)
+            ];
+        });
+
+        return view('front.orders.search', [
+            'orders' => $collectionOrders,
+            'searchTerm' => $searchTerm,
+        ]);
+    }
+
 }

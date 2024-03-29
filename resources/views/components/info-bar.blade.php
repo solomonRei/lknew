@@ -19,12 +19,13 @@
         </div>
     </div>
     <div class="info-bar__search">
-        <form class="search">
+        <form class="search" action="{{ route('order.search') }}" method="GET">
             <input
                 class="search__input"
                 type="text"
-                required
+                name="searchTerm"
                 placeholder="Название заказа, № заказа или позиции"
+                required
             />
             <div class="search__addon">
                 <svg viewBox="0 0 24 24" fill="none" class="search__icon">

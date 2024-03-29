@@ -68,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders/{order}/export', [OrderController::class, 'export'])->name('orders.export');
     Route::post('/order/item/{itemId}/update', [OrderController::class, 'updateItem'])->name('orders.updateItem');
     Route::delete('/order-item/{itemId}/delete', [OrderController::class, 'deleteItem'])->name('order.item.delete');
+    Route::get('/order/search', [OrderController::class, 'search'])->name('order.search');
 
 //    Route::get('/profile', [UserProfileController::class, 'index'])->name('profile.index');
 //    Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
