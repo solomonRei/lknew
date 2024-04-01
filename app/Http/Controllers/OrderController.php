@@ -33,8 +33,7 @@ class OrderController extends Controller
     {
         $orders = Order::with('items')
             ->where('user_id', $this->userService->getCurrentUser()->id)
-            ->where('status', '!=', 'canceled')
-            ->where('status', '!=', 'deleted')
+            ->whereNotIn('status', ['cancelled', 'deleted'])
             ->orderByRaw("CASE WHEN status = 'not_created' THEN 0 ELSE 1 END, updated_at DESC")
             ->get();
 
@@ -91,9 +90,22 @@ class OrderController extends Controller
     {
         $validated = $request->validated();
 
+        $userId = auth()->id();
+
+        $draftCount = Order::where('user_id', $userId)
+            ->where('status', 'not_created')
+            ->count();
+
+        if ($draftCount >= 10) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Достигнуто максимальное количество черновиков (10).',
+            ]);
+        }
+
         $orderId = $request->input('order_id');
         $order = Order::find($orderId) ?? new Order([
-                'user_id' => auth()->id(),
+                'user_id' => $userId,
                 'status' => 'not_created',
             ]);
         $order->save();
