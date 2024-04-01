@@ -589,7 +589,7 @@
                                 window.location.reload();
                             }, 2000);
                         } else {
-                            alert('Order created but no ID returned');
+                            showErrorAlert(response.message);
                         }
                     },
                     error: function (xhr, status, error) {
