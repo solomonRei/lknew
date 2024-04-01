@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddAddressRequest;
 use App\Http\Requests\AddPhoneRequest;
+use App\Http\Requests\SocialLinkRequest;
 use App\Http\Requests\UpdateAvatarRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Interfaces\Services\UserProfileServiceInterface;
@@ -11,6 +12,7 @@ use App\Interfaces\Services\UserServiceInterface;
 use App\Models\Address;
 use App\Models\Phone;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class UserProfileController extends Controller
@@ -48,6 +50,47 @@ class UserProfileController extends Controller
         }
     }
 
+    public function editSocialLink(SocialLinkRequest $request, $type)
+    {
+        $types = ['vk', 'telegram', 'whatsapp', 'viber'];
+
+        if (!in_array($type, $types)) {
+            return response()->json(['success' => false, 'message' => 'Недопустимый тип социальной сети.'], 400);
+        }
+
+        $userProfile = $this->userProfileService->getAuthenticatedUserProfile();
+
+        $socialLink = $userProfile->socialLinks()->firstOrCreate(['type' => $type, 'url' => '']);
+
+        $socialLink->update(['url' => $request->input('url')]);
+
+        return response()->json(['success' => true, 'message' => 'Ссылка социальной сети обновлена.']);
+    }
+
+
+    public function deleteSocialLink($type)
+    {
+        $types = ['vk', 'facebook', 'instagram', 'twitter', 'viber'];
+
+        if (!in_array($type, $types)) {
+            return response()->json(['success' => false, 'message' => 'Недопустимый тип социальной сети.'], 400);
+        }
+
+        $userProfile = $this->userProfileService->getAuthenticatedUserProfile();
+
+        $socialLink = $userProfile->socialLinks()->where('type', $type)->first();
+
+        if (!$socialLink) {
+            return response()->json(['success' => false, 'message' => 'Ссылка социальной сети не найдена.'], 404);
+        }
+
+        $socialLink->delete();
+
+        return response()->json(['success' => true, 'message' => 'Ссылка социальной сети удалена.']);
+    }
+
+
+
     public function updateAvatar(UpdateAvatarRequest $request)
     {
         try {
@@ -55,7 +98,7 @@ class UserProfileController extends Controller
             if ($this->userProfileService->updateAvatar($imageFile)->avatar !== null) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Avatar updated successfully.',
+                    'message' => 'Фото успешно обновленно.',
                     'image' => 'data:image/jpeg;base64,' . base64_encode($this->userProfileService->updateAvatar($imageFile)->avatar)
                 ]);
             }
@@ -80,10 +123,10 @@ class UserProfileController extends Controller
                 'email' => $profileData['email'] ?? null,
             ]);
 
-            return redirect()->back()->with('success', 'Profile updated successfully.');
+            return redirect()->back()->with('success', 'Профиль успешно обновлен.');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->back()->with('error', 'There was an error updating the profile.');
+            return redirect()->back()->with('error', 'Произошла ошибка во вреся обновления профиля');
         }
     }
 

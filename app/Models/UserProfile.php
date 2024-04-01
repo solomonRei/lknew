@@ -49,4 +49,10 @@ class UserProfile extends Model
         return $this->hasMany(Address::class);
     }
 
+    public function socialLinks()
+    {
+        return $this->hasMany(SocialLink::class);
+    }
+
+
 }

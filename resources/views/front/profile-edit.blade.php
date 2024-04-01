@@ -13,8 +13,16 @@
 @section('content')
     @include('components.info-bar')
     <hr class="layout__divider"/>
-    <nav class="layout__breadcrumb"><a href="#">Главная</a> / Мои заказы</nav>
-    @include('components.layout-head')
+    <nav class="layout__breadcrumb"><a href="#">Главная</a> / Редактировать профиль</nav>
+    <div class="layout__head">
+        <h1 class="layout__title">Профиль</h1>
+        <a href="{{ route('user.editProfile') }}" class="settings-link"
+        ><svg viewBox="0 0 24 24" fill="currentColor" class="settings-link__icon">
+                <path
+                    d="m19.44 12.99-.01.02c.04-.33.08-.67.08-1.01 0-.34-.03-.66-.07-.99l.01.02 2.44-1.92-2.43-4.22-2.87 1.16.01.01a7.67 7.67 0 0 0-1.71-1h.01L14.44 2H9.57l-.44 3.07h.01c-.62.26-1.19.6-1.71 1l.01-.01-2.88-1.17-2.44 4.22 2.44 1.92.01-.02a6.77 6.77 0 0 0 .01 2l-.01-.02-2.1 1.65-.33.26 2.43 4.2 2.88-1.15-.02-.04c.53.41 1.1.75 1.73 1.01h-.03L9.58 22h4.85l.06-.42.38-2.65h-.01c.62-.26 1.2-.6 1.73-1.01l-.02.04 2.88 1.15 2.43-4.2-.33-.26-2.11-1.66ZM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"
+                ></path></svg
+            ></a>
+    </div>
     <div class="profile">
         <div class="profile__side">
             <div class="profile__user">
@@ -76,10 +84,9 @@
                     <div class="mt-10">
                         <p class="profile__legend">Предпочитаемый вид связи:</p>
                         <div class="grid gap-2.5">
-                            <!--
                             <div class="edit-item">
                                 <label class="checkbox edit-item__checkbox" style=""
-                                ><input class="checkbox__input" type="checkbox" checked/><span
+                                ><input class="checkbox__input" type="checkbox" {{ isset($profile->socialLinks()->where('type', 'vk')->first()->url) ? 'checked' : '' }} /><span
                                         class="checkbox__control"
                                         aria-hidden="true"
                                     ><svg viewBox="0 0 20 20" fill="currentColor">
@@ -97,11 +104,11 @@
                                                     ></path>
                                                 </svg>
                                             </div>
-                                            <span class="edit-item__social-value">id...</span>
+                                            <span class="edit-item__social-value">{{ $profile->socialLinks()->where('type', 'vk')->first()->url ?? 'id...' }}</span>
                                         </div>
                                     </div>
                                     <div class="edit-controls edit-item__controls">
-                                        <button type="button" class="edit-controls__button">
+                                        <button type="button" class="edit-controls__button edit-social-link-btn" data-type="vk">
                                             <svg
                                                 viewBox="0 0 20 20"
                                                 fill="currentColor"
@@ -113,7 +120,7 @@
                                             </svg>
                                         </button
                                         >
-                                        <button type="button" class="edit-controls__button">
+                                        <button type="button" class="edit-controls__button delete-social-link-btn" data-type="vk">
                                             <svg
                                                 viewBox="0 0 20 20"
                                                 fill="currentColor"
@@ -129,7 +136,7 @@
                             </div>
                             <div class="edit-item">
                                 <label class="checkbox edit-item__checkbox" style=""
-                                ><input class="checkbox__input" type="checkbox"/><span
+                                ><input class="checkbox__input" type="checkbox" {{ isset($profile->socialLinks()->where('type', 'telegram')->first()->url) ? 'checked' : '' }}/><span
                                         class="checkbox__control"
                                         aria-hidden="true"
                                     ><svg viewBox="0 0 20 20" fill="currentColor">
@@ -147,11 +154,11 @@
                                                     ></path>
                                                 </svg>
                                             </div>
-                                            <span class="edit-item__social-value">id...</span>
+                                            <span class="edit-item__social-value">{{ $profile->socialLinks()->where('type', 'telegram')->first()->url ?? 'id...' }}</span>
                                         </div>
                                     </div>
                                     <div class="edit-controls edit-item__controls">
-                                        <button type="button" class="edit-controls__button">
+                                        <button type="button" class="edit-controls__button edit-social-link-btn" data-type="telegram">
                                             <svg
                                                 viewBox="0 0 20 20"
                                                 fill="currentColor"
@@ -163,7 +170,7 @@
                                             </svg>
                                         </button
                                         >
-                                        <button type="button" class="edit-controls__button">
+                                        <button type="button" class="edit-controls__button delete-social-link-btn" data-type="telegram">
                                             <svg
                                                 viewBox="0 0 20 20"
                                                 fill="currentColor"
@@ -179,7 +186,7 @@
                             </div>
                             <div class="edit-item">
                                 <label class="checkbox edit-item__checkbox" style=""
-                                ><input class="checkbox__input" type="checkbox"/><span
+                                ><input class="checkbox__input" type="checkbox" {{ isset($profile->socialLinks()->where('type', 'viber')->first()->url) ? 'checked' : '' }}/><span
                                         class="checkbox__control"
                                         aria-hidden="true"
                                     ><svg viewBox="0 0 20 20" fill="currentColor">
@@ -197,11 +204,11 @@
                                                     ></path>
                                                 </svg>
                                             </div>
-                                            <span class="edit-item__social-value">id...</span>
+                                            <span class="edit-item__social-value">{{ $profile->socialLinks()->where('type', 'viber')->first()->url ?? 'id...' }}</span>
                                         </div>
                                     </div>
                                     <div class="edit-controls edit-item__controls">
-                                        <button type="button" class="edit-controls__button">
+                                        <button type="button" class="edit-controls__button edit-social-link-btn" data-type="viber">
                                             <svg
                                                 viewBox="0 0 20 20"
                                                 fill="currentColor"
@@ -213,7 +220,7 @@
                                             </svg>
                                         </button
                                         >
-                                        <button type="button" class="edit-controls__button">
+                                        <button type="button" class="edit-controls__button delete-social-link-btn" data-type="viber">
                                             <svg
                                                 viewBox="0 0 20 20"
                                                 fill="currentColor"
@@ -229,7 +236,7 @@
                             </div>
                             <div class="edit-item">
                                 <label class="checkbox edit-item__checkbox" style=""
-                                ><input class="checkbox__input" type="checkbox"/><span
+                                ><input class="checkbox__input" type="checkbox" {{ isset($profile->socialLinks()->where('type', 'whatsapp')->first()->url) ? 'checked' : '' }}/><span
                                         class="checkbox__control"
                                         aria-hidden="true"
                                     ><svg viewBox="0 0 20 20" fill="currentColor">
@@ -247,11 +254,11 @@
                                                     ></path>
                                                 </svg>
                                             </div>
-                                            <span class="edit-item__social-value"><input type="text"/></span>
+                                            <span class="edit-item__social-value">{{ $profile->socialLinks()->where('type', 'whatsapp')->first()->url ?? 'id...' }}</span>
                                         </div>
                                     </div>
                                     <div class="edit-controls edit-item__controls">
-                                        <button type="button" class="edit-controls__button">
+                                        <button type="button" class="edit-controls__button edit-social-link-btn" data-type="whatsapp">
                                             <svg
                                                 viewBox="0 0 20 20"
                                                 fill="currentColor"
@@ -263,7 +270,7 @@
                                             </svg>
                                         </button
                                         >
-                                        <button type="button" class="edit-controls__button">
+                                        <button type="button" class="edit-controls__button delete-social-link-btn" data-type="whatsapp">
                                             <svg
                                                 viewBox="0 0 20 20"
                                                 fill="currentColor"
@@ -277,7 +284,6 @@
                                     </div>
                                 </div>
                             </div>
-                            -->
                         </div>
                     </div>
                     <div class="mt-10">
@@ -607,6 +613,78 @@
                 }
             });
         }
+
+        $('.edit-social-link-btn').click(function() {
+            var typeId = $(this).data('type');
+            var newValue = prompt("Введите новое значение для " + typeId);
+            if (newValue) {
+                $.ajax({
+                    url: '/profile/socialLinks/' + typeId + '/edit',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        url: newValue,
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            showSuccessAlert('Ссылка обновлена');
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                        }
+                    },
+                    error: function(xhr) {
+                        if (xhr.responseJSON && xhr.responseJSON.errors) {
+                            let errorMessages = [];
+                            Object.values(xhr.responseJSON.errors).forEach((messages) => {
+                                errorMessages.push(...messages);
+                            });
+
+                            showErrorAlert(errorMessages.join('\n'));
+                        } else {
+                            console.error('Error:', error);
+                            showErrorAlert(error);
+                        }
+                    }
+                });
+            }
+        });
+
+        $('.delete-social-link-btn').click(function() {
+            var typeId = $(this).data('type');
+            if (confirm("Вы уверены, что хотите удалить " + typeId + "?")) {
+                $.ajax({
+                    url: '/profile/socialLinks/' + typeId + '/delete',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                        }
+                    },
+                    error: function(xhr) {
+                        if (xhr.responseJSON && xhr.responseJSON.errors) {
+                            let errorMessages = [];
+                            Object.values(xhr.responseJSON.errors).forEach((messages) => {
+                                errorMessages.push(...messages);
+                            });
+
+                            showErrorAlert(errorMessages.join('\n'));
+                        } else {
+                            console.error('Error:', error);
+                            showErrorAlert(error);
+                        }
+                    }
+                });
+            }
+        });
+
 
 
         document.addEventListener('DOMContentLoaded', function () {

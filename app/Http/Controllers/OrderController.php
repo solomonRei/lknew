@@ -240,7 +240,7 @@ class OrderController extends Controller
         if ($totalPrice < 10000) {
             return response()->json([
                 'success' => false,
-                'message' => 'Сумма заказа должна быть больше 10 000.',
+                'message' => 'Сумма заказа должна быть больше 10 000 рублей.',
             ]);
         }
 

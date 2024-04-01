@@ -37,7 +37,7 @@ class UserProfileService implements UserProfileServiceInterface
             $query->orderBy('is_active', 'desc')->orderBy('created_at', 'desc')->get();
         }, 'addresses' => function ($query) {
             $query->orderBy('is_active', 'desc')->orderBy('created_at', 'desc')->get();
-        }]);
+        }, 'socialLinks']);
 
         return $user->profile;
     }

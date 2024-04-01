@@ -5,8 +5,16 @@
 @section('content')
     @include('components.info-bar')
     <hr class="layout__divider"/>
-    <nav class="layout__breadcrumb"><a href="#">Главная</a> / Мои заказы</nav>
-    @include('components.layout-head')
+    <nav class="layout__breadcrumb"><a href="#">Главная</a> / Профиль</nav>
+    <div class="layout__head">
+        <h1 class="layout__title">Профиль</h1>
+        <a href="{{ route('user.editProfile') }}" class="settings-link"
+        ><svg viewBox="0 0 24 24" fill="currentColor" class="settings-link__icon">
+                <path
+                    d="m19.44 12.99-.01.02c.04-.33.08-.67.08-1.01 0-.34-.03-.66-.07-.99l.01.02 2.44-1.92-2.43-4.22-2.87 1.16.01.01a7.67 7.67 0 0 0-1.71-1h.01L14.44 2H9.57l-.44 3.07h.01c-.62.26-1.19.6-1.71 1l.01-.01-2.88-1.17-2.44 4.22 2.44 1.92.01-.02a6.77 6.77 0 0 0 .01 2l-.01-.02-2.1 1.65-.33.26 2.43 4.2 2.88-1.15-.02-.04c.53.41 1.1.75 1.73 1.01h-.03L9.58 22h4.85l.06-.42.38-2.65h-.01c.62-.26 1.2-.6 1.73-1.01l-.02.04 2.88 1.15 2.43-4.2-.33-.26-2.11-1.66ZM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"
+                ></path></svg
+            ></a>
+    </div>
     <div class="profile">
         <div class="profile__side">
             <div class="profile__user">
@@ -66,13 +74,13 @@
                         <div class="profile__term">Предпочитаемый вид связи:</div>
                         <div class="profile__def">
                             <div class="profile__socials">
-                                <div class="social social_vk">
-                                    <svg viewBox="0 0 24 24" fill="currentColor" class="social__icon">
-                                        <path
-                                            d="M12.59 16.2c-4.51 0-7.08-3.15-7.19-8.4h2.26c.07 3.85 1.74 5.48 3.06 5.82V7.8h2.13v3.32c1.3-.14 2.67-1.66 3.13-3.32h2.13a6.47 6.47 0 0 1-2.9 4.19 6.54 6.54 0 0 1 3.39 4.21h-2.34A4.16 4.16 0 0 0 15 14.17a4.04 4.04 0 0 0-2.15-.97v3h-.26Z"
-                                        ></path>
-                                    </svg>
-                                </div>
+                            @foreach($userProfile->socialLinks as $socialLink)
+                                    <div class="social social_{{ $socialLink->type }}">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" class="social__icon">
+                                            @include('components.social_icons.' . $socialLink->type)
+                                        </svg>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

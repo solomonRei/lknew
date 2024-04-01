@@ -1,7 +1,7 @@
 <div class="sidebar">
     <div class="sidebar__inner">
         <div class="user">
-            <div class="user__content">
+            <div class="user__content" onclick="location.href='{{ route('profile') }}';" style="cursor: pointer;">
                 <img
                     src="{{ $userProfile->avatar ? 'data:image/png;base64,' . base64_encode($userProfile->avatar) : '/static/img/ava-placeholder.svg' }}"
                     width="44"
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <nav class="user__actions">
-                <a href="{{ route('profile') }}" class="user__action"
+                <a href="{{ route('user.editProfile') }}" class="user__action"
                 >
                     <svg viewBox="0 0 24 24" fill="currentColor" class="user__action-icon">
                         <path

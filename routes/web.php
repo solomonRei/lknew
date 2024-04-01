@@ -51,6 +51,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/address/{addressId}/edit', [UserProfileController::class, 'editAddress'])->name('profile.editAddress');
     Route::post('/profile/address/{addressId}/update', [UserProfileController::class, 'updateAddress'])->name('profile.updateAddress');
     Route::delete('/profile/address/{addressId}/delete', [UserProfileController::class, 'deleteAddress'])->name('profile.deleteAddress');
+    Route::post('/profile/socialLinks/{type}/edit', [UserProfileController::class, 'editSocialLink'])->name('profile.social.links.edit');
+    Route::post('/profile/socialLinks/{type}/delete', [UserProfileController::class, 'deleteSocialLink'])->name('profile.social.links.delete');
+
 
     Route::post('/user/change-password', [UserController::class, 'changePassword'])->name('user.changePassword');
     Route::post('/user/photo', [UserProfileController::class, 'updateAvatar'])->name('user.avatarUpdate');
